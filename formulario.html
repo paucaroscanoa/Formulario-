@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Webinar - Diseño de Experimentos en Minería</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    header img {
+      max-width: 120px;
+      margin-bottom: 10px;
+    }
+    .form-container {
+      background: white;
+      padding: 40px;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+    h1 {
+      color: #e67e22;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    label {
+      color: #555;
+      font-weight: bold;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #e67e22;
+      color: white;
+      border: none;
+      font-size: 16px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #cf711f;
+    }
+    .thank-you-message {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
+    }
+  </style>
+  <script>
+    function showThankYou(event) {
+      event.preventDefault();
+      const form = document.getElementById('registroForm');
+      const message = document.getElementById('thankYouMessage');
+      form.style.display = 'none';
+      message.style.display = 'block';
+
+      // Enviar formulario manualmente
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        console.log('Formulario enviado');
+      }).catch(error => {
+        console.error('Error al enviar el formulario', error);
+      });
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <!-- Logo opcional -->
+  <!-- <img src="logo.png" alt="Logo de la empresa"> -->
+  <h2>Improvement Consulting Global</h2>
+</header>
+
+<div class="form-container">
+  <h1>Registro Webinar<br>Diseño de Experimentos Aplicado a la Minería</h1>
+
+  <form id="registroForm" action="https://formspree.io/f/xdkgkvgr" method="POST" onsubmit="showThankYou(event)">
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="Nombre" required>
+
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="Correo Electrónico" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="Teléfono" required>
+
+    <label for="empresa">Empresa donde trabaja:</label>
+    <input type="text" id="empresa" name="Empresa" required>
+
+    <label for="informacion">¿Cómo se enteró del webinar?</label>
+    <textarea id="informacion" name="Cómo se enteró" rows="3" required></textarea>
+
+    <input type="hidden" name="_subject" value="Nuevo registro para el webinar">
+    <input type="hidden" name="_cc" value="improvement.consulting.global@gmail.com">
+
+    <button type="submit">Registrarme</button>
+  </form>
+
+  <div id="thankYouMessage" class="thank-you-message">
+    ¡Gracias por registrarte!<br>Te enviaremos más información a tu correo.
+  </div>
+</div>
+
+</body>
+</html>
